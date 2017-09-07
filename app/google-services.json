@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1078397894628",
+    "firebase_url": "https://carpentry-shop.firebaseio.com",
+    "project_id": "carpentry-shop",
+    "storage_bucket": "carpentry-shop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078397894628:android:702f36d031ec4734",
+        "android_client_info": {
+          "package_name": "com.example.damir.firstapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1078397894628-31fsuf3g104nfb4o7n6m5ugpsrrtgjhk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.damir.firstapp",
+            "certificate_hash": "187e2e16b71975b55de71a50f00c09ab695b0adf"
+          }
+        },
+        {
+          "client_id": "1078397894628-t6pnjrl1fhchdctie5a1lop4st79st6l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-me--TgS5Pyyr9BqlBsFTehaRChMpaWo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1078397894628-t6pnjrl1fhchdctie5a1lop4st79st6l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
