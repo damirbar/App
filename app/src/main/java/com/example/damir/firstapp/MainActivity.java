@@ -1,5 +1,6 @@
 package com.example.damir.firstapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
+//import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
@@ -86,9 +87,14 @@ public class MainActivity extends AppCompatActivity {
                                             "Password incorrect\n"/* +
                                                     "You typed " + Pass.hashCode() +"\n" +
                                                     "And the pass is " + getPass*/, Toast.LENGTH_LONG).show();
-                                } else {
+
+                                } else {    //  Access Granted
                                     Toast.makeText(MainActivity.this,
                                             "Access granted", Toast.LENGTH_LONG).show();
+
+                                    Intent MapActivity = new Intent(MainActivity.this, GetLocation.class);
+                                    startActivity(MapActivity);
+
                                 }
 
                             } else {
