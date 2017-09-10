@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:text="Back"
+        android:text="@string/back_button"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginStart="13dp" />
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:background="@android:color/white"
-        android:text="Branches"
+        android:text="@string/branches_text"
         android:textAlignment="center"
 
         android:textSize="24sp"
@@ -47,14 +47,14 @@
         android:layout_alignStart="@+id/branches"
         android:layout_below="@+id/branches"
         android:layout_marginTop="20dp"
-        android:text="Jerusalem" />
+        android:text="@string/jerusalem_button" />
 
     <Button
         android:id="@+id/pth_tikwa_btn"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Petah Tikwa"
+        android:text="@string/petah_tikwa_button"
         android:layout_below="@+id/jrslm_btn"
         android:layout_alignStart="@+id/jrslm_btn" />
 
@@ -63,7 +63,7 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
-        android:text="Tel-Aviv"
+        android:text="@string/tlv_button"
         android:layout_below="@+id/pth_tikwa_btn"
         android:layout_alignStart="@+id/pth_tikwa_btn" />
 

@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
         RegisterOnce = true;
 
+        mDatabase.child("users").child("lidor")
+                .child("username").setValue("lidor");
 
         mSgninBtn.setOnClickListener(new View.OnClickListener(){
 
@@ -76,12 +78,18 @@ public class MainActivity extends AppCompatActivity {
                                 String getPass = dataSnapshot.child("password").getValue().toString();
 
                                 if(! getPass.equals("" + Pass.hashCode())) {
-                                    Toast.makeText(MainActivity.this,
-                                            "Password incorrect\n", Toast.LENGTH_LONG).show();
+                                    String message = String.format(MainActivity.this.getResources()
+                                            .getString(R.string.pass_incorrect));
+
+                                    Toast.makeText(MainActivity.this, message,
+                                            Toast.LENGTH_LONG).show();
 
                                 } else {    //  Access Granted
-                                    Toast.makeText(MainActivity.this,
-                                            "Access granted", Toast.LENGTH_LONG).show();
+                                    String message = String.format(MainActivity.this.getResources()
+                                            .getString(R.string.access_granted));
+
+                                    Toast.makeText(MainActivity.this, message,
+                                            Toast.LENGTH_LONG).show();
 
                                     mUserExisting.setText(null);
                                     mPassExisting.setText(null);
@@ -93,8 +101,11 @@ public class MainActivity extends AppCompatActivity {
 
                             } else {
 
-                                Toast.makeText(MainActivity.this,
-                                        "User not found!", Toast.LENGTH_LONG).show();
+                                String message = String.format(MainActivity.this.getResources()
+                                        .getString(R.string.user_not_found));
+
+                                Toast.makeText(MainActivity.this, message,
+                                        Toast.LENGTH_LONG).show();
                             }
                         }
 
@@ -106,10 +117,11 @@ public class MainActivity extends AppCompatActivity {
 
 
                 } else {
-                    System.out.println("Fill username and password!");
-                    Toast.makeText(MainActivity.this,
-                            "Fill username and password!.", Toast.LENGTH_LONG).show();
+                    String message = String.format(MainActivity.this.getResources()
+                            .getString(R.string.fill_user_pass));
 
+                    Toast.makeText(MainActivity.this, message,
+                            Toast.LENGTH_LONG).show();
 
                 }
 
@@ -137,21 +149,28 @@ public class MainActivity extends AppCompatActivity {
                     verPass  = mVerPassNew.getText().toString();
 
                     if(userName.length() < 5) {
-                        Toast.makeText(MainActivity.this,
-                                "User Name must be at least 5 character long!.",
+                        String message = String.format(MainActivity.this.getResources()
+                                .getString(R.string.user_length_min));
+
+                        Toast.makeText(MainActivity.this, message,
                                 Toast.LENGTH_LONG).show();
                     }
 
                     if(Pass.length() < 6) {
-                        Toast.makeText(MainActivity.this,
-                                "Password must be at least 6 character long!.",
+                        String message = String.format(MainActivity.this.getResources()
+                                .getString(R.string.pass_length_min));
+
+                        Toast.makeText(MainActivity.this, message,
                                 Toast.LENGTH_LONG).show();
                     }
 
                     //  Check if the password verification matches the password
                     if(! (Pass.equals(verPass))) {
-                        Toast.makeText(MainActivity.this,
-                                "The password verification failed!.", Toast.LENGTH_LONG).show();
+                        String message = String.format(MainActivity.this.getResources()
+                                .getString(R.string.pass_ver_failed));
+
+                        Toast.makeText(MainActivity.this, message,
+                                Toast.LENGTH_LONG).show();
                         return;
                     }
 
@@ -161,8 +180,12 @@ public class MainActivity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
                             if (dataSnapshot.exists() && RegisterOnce) {
-                                Toast.makeText(MainActivity.this,
-                                        "User already exists", Toast.LENGTH_LONG).show();
+                                String message = String.format(MainActivity.this.getResources()
+                                        .getString(R.string.user_exists));
+
+                                Toast.makeText(MainActivity.this, message,
+                                        Toast.LENGTH_LONG).show();
+
 //                                Toast.makeText(MainActivity.this,
 //                                        "Data: "+dataSnapshot.getKey().toString(), Toast.LENGTH_LONG).show();
 
@@ -175,8 +198,15 @@ public class MainActivity extends AppCompatActivity {
                                 mDatabase.child("users").child(userName)
                                     .child("password").setValue(Pass.hashCode());
 
-                                Toast.makeText(MainActivity.this,
-                                        "Welcome "+userName+"!", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(MainActivity.this,
+//                                        "Welcome "+userName+"!", Toast.LENGTH_LONG).show();
+
+                                String message = String.format(MainActivity.this.getResources()
+                                        .getString(R.string.welcome), userName);
+
+                                Toast.makeText(MainActivity.this, message,
+                                        Toast.LENGTH_LONG).show();
+
 
                                 mUserNew.setText(null);
                                 mPassNew.setText(null);
@@ -198,9 +228,11 @@ public class MainActivity extends AppCompatActivity {
 //                            .child("password").setValue(Pass.hashCode());
 
                 } else {
-                    Toast.makeText(MainActivity.this,
-                            "You must fill all of the fields!", Toast.LENGTH_LONG).show();
-                    System.out.println("No name was provided!");
+                    String message = String.format(MainActivity.this.getResources()
+                            .getString(R.string.fill_all_fields));
+
+                    Toast.makeText(MainActivity.this, message,
+                            Toast.LENGTH_LONG).show();
                 }
             }
         });

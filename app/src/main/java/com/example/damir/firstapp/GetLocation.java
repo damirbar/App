@@ -72,7 +72,7 @@ public class GetLocation extends FragmentActivity
             @Override
             public void onClick(View v) {
                 LatLng Jerusalem = new LatLng(31.768319, 35.213710);
-                mMap.addMarker(new MarkerOptions().position(Jerusalem).title("Marker in Sydney"));
+                mMap.addMarker(new MarkerOptions().position(Jerusalem).title("Jerusalem"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(Jerusalem));
 
             }
@@ -83,7 +83,7 @@ public class GetLocation extends FragmentActivity
             @Override
             public void onClick(View v) {
                 LatLng TLV = new LatLng(32.085300, 34.781768);
-                mMap.addMarker(new MarkerOptions().position(TLV).title("Marker in Sydney"));
+                mMap.addMarker(new MarkerOptions().position(TLV).title("Tel-Aviv"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(TLV));
             }
         });
@@ -93,11 +93,13 @@ public class GetLocation extends FragmentActivity
             @Override
             public void onClick(View v) {
                 LatLng PetahTikwa = new LatLng(32.084041, 34.887762);
-                mMap.addMarker(new MarkerOptions().position(PetahTikwa).title("Marker in Sydney"));
+                mMap.addMarker(new MarkerOptions().position(PetahTikwa).title("Petah Tikwa"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(PetahTikwa));
             }
         });
 
+        onMyLocationButtonClick();
+        enableMyLocation();
 
     }
 
@@ -136,7 +138,14 @@ public class GetLocation extends FragmentActivity
 
     @Override
     public boolean onMyLocationButtonClick() {
-        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Get current location button clicked", Toast.LENGTH_SHORT).show();
+
+        String message = String.format(GetLocation.this.getResources()
+                .getString(R.string.get_curr_loc_btn));
+
+        Toast.makeText(GetLocation.this, message,
+                Toast.LENGTH_LONG).show();
+
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
         return false;

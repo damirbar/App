@@ -13,4 +13,19 @@
     <string name="sign_in">התחבר</string>
     <string name="sign_up">הירשם</string>
     <string name="ver_password">אימות סיסמה</string>
+    <string name="back_button">חזור</string>
+    <string name="branches_text">סניפים</string>
+    <string name="jerusalem_button">ירושלים</string>
+    <string name="petah_tikwa_button">פתח תקוה</string>
+    <string name="tlv_button">תל אביב</string>
+    <string name="pass_incorrect">סיסמה שגויה</string>
+    <string name="access_granted">הכניסה אושרה</string>
+    <string name="fill_all_fields">חובה למלא את כל השדות</string>
+    <string name="fill_user_pass">מלא שם משתמש וסיסמה</string>
+    <string name="pass_length_min">על הסיסמה להכיל לכל הפחות שישה תווים</string>
+    <string name="pass_ver_failed">אימות הסיסמה נכשל</string>
+    <string name="user_exists">שם משתמש זה כבר קיים במערכת</string>
+    <string name="user_length_min">על שם המשתמש להכיל לכל הפחות חמישה תווים</string>
+    <string name="user_not_found">משתמש לא נמצא</string>
+    <string name="welcome">ברוך הבא %s</string>
 </resources>
