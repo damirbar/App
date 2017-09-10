@@ -36,11 +36,12 @@ public class GetLocation extends FragmentActivity
     private boolean mPermissionDenied = false;
 
 
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+//    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private Button mBackBtn;
-    private SupportMapFragment mapFragment;
-//    private MapView mMapView;
-//    private MapController mMapCtrl;
+    private Button mJerusalemButton;
+    private Button mTLVButton;
+    private Button mPetahTikwaButton;
+//    private SupportMapFragment mapFragment;
     private GoogleMap mMap;
 
 
@@ -53,19 +54,47 @@ public class GetLocation extends FragmentActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        mJerusalemButton  = (Button) findViewById(R.id.jrslm_btn);
+        mTLVButton        = (Button) findViewById(R.id.tlv_btn);
+        mPetahTikwaButton = (Button) findViewById(R.id.pth_tikwa_btn);
+        mBackBtn          = (Button) findViewById(R.id.back_button);
 
-
-//        mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.map);
-
-        mBackBtn = (Button) findViewById(R.id.back_button);
-//        mMapView = (MapView) findViewById(R.id.map);
         mBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent goBack = new Intent(GetLocation.this, MainActivity.class);
-//                startActivity(goBack);
                 finish();
+            }
+        });
+
+
+        mJerusalemButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                LatLng Jerusalem = new LatLng(31.768319, 35.213710);
+                mMap.addMarker(new MarkerOptions().position(Jerusalem).title("Marker in Sydney"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(Jerusalem));
+
+            }
+        });
+
+        mTLVButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                LatLng TLV = new LatLng(32.085300, 34.781768);
+                mMap.addMarker(new MarkerOptions().position(TLV).title("Marker in Sydney"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(TLV));
+            }
+        });
+
+        mPetahTikwaButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                LatLng PetahTikwa = new LatLng(32.084041, 34.887762);
+                mMap.addMarker(new MarkerOptions().position(PetahTikwa).title("Marker in Sydney"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(PetahTikwa));
             }
         });
 

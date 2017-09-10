@@ -27,6 +27,46 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="13dp" />
 
+    <TextView
+        android:id="@+id/branches"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:background="@android:color/white"
+        android:text="Branches"
+        android:textAlignment="center"
+
+        android:textSize="24sp"
+        android:layout_below="@+id/back_button"
+        android:layout_alignStart="@+id/back_button" />
+
+    <Button
+        android:id="@+id/jrslm_btn"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/branches"
+        android:layout_below="@+id/branches"
+        android:layout_marginTop="20dp"
+        android:text="Jerusalem" />
+
+    <Button
+        android:id="@+id/pth_tikwa_btn"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Petah Tikwa"
+        android:layout_below="@+id/jrslm_btn"
+        android:layout_alignStart="@+id/jrslm_btn" />
+
+    <Button
+        android:id="@+id/tlv_btn"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:text="Tel-Aviv"
+        android:layout_below="@+id/pth_tikwa_btn"
+        android:layout_alignStart="@+id/pth_tikwa_btn" />
+
     <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->

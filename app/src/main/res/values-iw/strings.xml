@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">נגריה</string>
+    <string name="name_field">שדה שם</string>
+    <string name="title_activity_get_location">נגריה - מיקום</string>
+    <string name="title_activity_location">מפה</string>
+    <string name="action_settings">הגדרות</string>
+    <string name="enter_username">הזן שם משתמש</string>
+    <string name="create_password">צור סיסמה</string>
+    <string name="create_username">צור שם משתמש</string>
+    <string name="enter_password">הזן סיסמה</string>
+    <string name="or_text">או</string>
+    <string name="sign_in">התחבר</string>
+    <string name="sign_up">הירשם</string>
+    <string name="ver_password">אימות סיסמה</string>
+</resources>
