@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText mPassNew;      //  Text field for a new password
     private EditText mVerPassNew;   //  Text field for verification the new password
     private DatabaseReference mDatabase;
+    private boolean RegisterOnce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +45,8 @@ public class MainActivity extends AppCompatActivity {
         mPassNew      = (EditText) findViewById(R.id.signup_pass_field);
         mVerPassNew   = (EditText) findViewById(R.id.signup_veripass_field);
 
-//        LayoutInflater myInflater = LayoutInflater.from(this);
-//        View view = myInflater.inflate(R.layout.activity_main, null);
-//        Toast toast = new Toast(this);
-//        toast.setView(view);
-//        toast.setDuration(Toast.LENGTH_LONG);
-//        toast.setText("Invalid");
-////        toast.show();
+        RegisterOnce = true;
+
 
         mSgninBtn.setOnClickListener(new View.OnClickListener(){
 
@@ -64,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
                 if (! (mUserExisting.getText().toString().equals("")) &&
                         ! (mPassExisting.getText().toString().equals("")) ) {
 
-                    userName = mUserExisting.getText().toString();
-                    Pass     = mPassExisting.getText().toString();
+                    userName = mUserExisting.getText().toString().toLowerCase();
+                    Pass     = mPassExisting.getText().toString().toLowerCase();
 
                     mDatabase.child("users").child(userName).addValueEventListener(new ValueEventListener() {
                         @Override
@@ -79,18 +75,16 @@ public class MainActivity extends AppCompatActivity {
 //                                String getPass = "";
                                 String getPass = dataSnapshot.child("password").getValue().toString();
 
-//                                Toast.makeText(MainActivity.this,
-//                                        "Password = " + getPass, Toast.LENGTH_LONG).show();
-
                                 if(! getPass.equals("" + Pass.hashCode())) {
                                     Toast.makeText(MainActivity.this,
-                                            "Password incorrect\n"/* +
-                                                    "You typed " + Pass.hashCode() +"\n" +
-                                                    "And the pass is " + getPass*/, Toast.LENGTH_LONG).show();
+                                            "Password incorrect\n", Toast.LENGTH_LONG).show();
 
                                 } else {    //  Access Granted
                                     Toast.makeText(MainActivity.this,
                                             "Access granted", Toast.LENGTH_LONG).show();
+
+                                    mUserExisting.setText(null);
+                                    mPassExisting.setText(null);
 
                                     Intent MapActivity = new Intent(MainActivity.this, GetLocation.class);
                                     startActivity(MapActivity);
@@ -142,9 +136,17 @@ public class MainActivity extends AppCompatActivity {
                     Pass     = mPassNew.getText().toString();
                     verPass  = mVerPassNew.getText().toString();
 
-//                    Log.i("Text", ""+mDatabase.child("users").child(userName).child("password"));
+                    if(userName.length() < 5) {
+                        Toast.makeText(MainActivity.this,
+                                "User Name must be at least 5 character long!.",
+                                Toast.LENGTH_LONG).show();
+                    }
 
-//                    Query query = mDatabase.child("users").child(userName).equalTo("");
+                    if(Pass.length() < 6) {
+                        Toast.makeText(MainActivity.this,
+                                "Password must be at least 6 character long!.",
+                                Toast.LENGTH_LONG).show();
+                    }
 
                     //  Check if the password verification matches the password
                     if(! (Pass.equals(verPass))) {
@@ -158,14 +160,29 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
-                            if (dataSnapshot.getValue() != null) {
+                            if (dataSnapshot.exists() && RegisterOnce) {
                                 Toast.makeText(MainActivity.this,
                                         "User already exists", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(MainActivity.this,
+//                                        "Data: "+dataSnapshot.getKey().toString(), Toast.LENGTH_LONG).show();
+
+                                return;
+
                             } else {
+                                RegisterOnce = false;
                                 mDatabase.child("users").child(userName)
                                     .child("username").setValue(userName);
                                 mDatabase.child("users").child(userName)
                                     .child("password").setValue(Pass.hashCode());
+
+                                Toast.makeText(MainActivity.this,
+                                        "Welcome "+userName+"!", Toast.LENGTH_LONG).show();
+
+                                mUserNew.setText(null);
+                                mPassNew.setText(null);
+                                mVerPassNew.setText(null);
+
+                                return;
                             }
                         }
 
