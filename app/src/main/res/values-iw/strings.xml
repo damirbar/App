@@ -28,4 +28,5 @@
     <string name="user_length_min">על שם המשתמש להכיל לכל הפחות חמישה תווים</string>
     <string name="user_not_found">משתמש לא נמצא</string>
     <string name="welcome">ברוך הבא %s</string>
+    <string name="get_curr_loc_btn">עובר למיקום שלך</string>
 </resources>

@@ -31,7 +31,7 @@
     <string name="user_exists">User already exists</string>
     <string name="welcome">Welcome %s</string>
     <string name="fill_all_fields">You must fill all of the fields</string>
-    <string name="get_curr_loc_btn">Get current location button clicked</string>
+    <string name="get_curr_loc_btn">Going to your location</string>
 
 
 </resources>
