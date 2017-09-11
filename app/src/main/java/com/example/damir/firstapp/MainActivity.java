@@ -154,6 +154,8 @@ public class MainActivity extends AppCompatActivity {
 
                         Toast.makeText(MainActivity.this, message,
                                 Toast.LENGTH_LONG).show();
+
+                        return;
                     }
 
                     if(Pass.length() < 6) {
@@ -162,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
 
                         Toast.makeText(MainActivity.this, message,
                                 Toast.LENGTH_LONG).show();
+
+                        return;
                     }
 
                     //  Check if the password verification matches the password
@@ -171,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Toast.makeText(MainActivity.this, message,
                                 Toast.LENGTH_LONG).show();
+
                         return;
                     }
 
@@ -178,7 +183,9 @@ public class MainActivity extends AppCompatActivity {
                     mDatabase.child("users").child(userName).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (!RegisterOnce) {
 
+                            }
                             if (dataSnapshot.exists() && RegisterOnce) {
                                 String message = String.format(MainActivity.this.getResources()
                                         .getString(R.string.user_exists));

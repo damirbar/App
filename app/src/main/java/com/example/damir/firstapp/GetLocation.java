@@ -98,8 +98,9 @@ public class GetLocation extends FragmentActivity
             }
         });
 
-        onMyLocationButtonClick();
-        enableMyLocation();
+
+//        onMyLocationButtonClick();
+//        enableMyLocation();
 
     }
 
@@ -119,6 +120,8 @@ public class GetLocation extends FragmentActivity
 
         mMap.setOnMyLocationButtonClickListener(this);
         enableMyLocation();
+
+//        onMyLocationButtonClick();
     }
 
     /**
