@@ -47,9 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
         RegisterOnce = true;
 
-        mDatabase.child("users").child("lidor")
-                .child("username").setValue("lidor");
-
         mSgninBtn.setOnClickListener(new View.OnClickListener(){
 
             String userName;
@@ -65,55 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     userName = mUserExisting.getText().toString().toLowerCase();
                     Pass     = mPassExisting.getText().toString().toLowerCase();
 
-                    mDatabase.child("users").child(userName).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            if (dataSnapshot.getValue() != null) {
-//                                String getPass = mDatabase.child("users").child(userName)
-//                                        .child("password");
-//                                String getPass = dataSnapshot
-//                                        .child("password").getValue(String.class);
-//                                String getPass = "";
-                                String getPass = dataSnapshot.child("password").getValue().toString();
-
-                                if(! getPass.equals("" + Pass.hashCode())) {
-                                    String message = String.format(MainActivity.this.getResources()
-                                            .getString(R.string.pass_incorrect));
-
-                                    Toast.makeText(MainActivity.this, message,
-                                            Toast.LENGTH_LONG).show();
-
-                                } else {    //  Access Granted
-                                    String message = String.format(MainActivity.this.getResources()
-                                            .getString(R.string.access_granted));
-
-                                    Toast.makeText(MainActivity.this, message,
-                                            Toast.LENGTH_LONG).show();
-
-                                    mUserExisting.setText(null);
-                                    mPassExisting.setText(null);
-
-                                    Intent MapActivity = new Intent(MainActivity.this, GetLocation.class);
-                                    startActivity(MapActivity);
-
-                                }
-
-                            } else {
-
-                                String message = String.format(MainActivity.this.getResources()
-                                        .getString(R.string.user_not_found));
-
-                                Toast.makeText(MainActivity.this, message,
-                                        Toast.LENGTH_LONG).show();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
+                    getUser(userName, Pass);
 
 
                 } else {
@@ -148,86 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     Pass     = mPassNew.getText().toString();
                     verPass  = mVerPassNew.getText().toString();
 
-                    if(userName.length() < 5) {
-                        String message = String.format(MainActivity.this.getResources()
-                                .getString(R.string.user_length_min));
-
-                        Toast.makeText(MainActivity.this, message,
-                                Toast.LENGTH_LONG).show();
-
-                        return;
-                    }
-
-                    if(Pass.length() < 6) {
-                        String message = String.format(MainActivity.this.getResources()
-                                .getString(R.string.pass_length_min));
-
-                        Toast.makeText(MainActivity.this, message,
-                                Toast.LENGTH_LONG).show();
-
-                        return;
-                    }
-
-                    //  Check if the password verification matches the password
-                    if(! (Pass.equals(verPass))) {
-                        String message = String.format(MainActivity.this.getResources()
-                                .getString(R.string.pass_ver_failed));
-
-                        Toast.makeText(MainActivity.this, message,
-                                Toast.LENGTH_LONG).show();
-
-                        return;
-                    }
-
-                    //  Check if there is already a user with that name
-                    mDatabase.child("users").child(userName).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (!RegisterOnce) {
-
-                            }
-                            if (dataSnapshot.exists() && RegisterOnce) {
-                                String message = String.format(MainActivity.this.getResources()
-                                        .getString(R.string.user_exists));
-
-                                Toast.makeText(MainActivity.this, message,
-                                        Toast.LENGTH_LONG).show();
-
-//                                Toast.makeText(MainActivity.this,
-//                                        "Data: "+dataSnapshot.getKey().toString(), Toast.LENGTH_LONG).show();
-
-                                return;
-
-                            } else {
-                                RegisterOnce = false;
-                                mDatabase.child("users").child(userName)
-                                    .child("username").setValue(userName);
-                                mDatabase.child("users").child(userName)
-                                    .child("password").setValue(Pass.hashCode());
-
-//                                Toast.makeText(MainActivity.this,
-//                                        "Welcome "+userName+"!", Toast.LENGTH_LONG).show();
-
-                                String message = String.format(MainActivity.this.getResources()
-                                        .getString(R.string.welcome), userName);
-
-                                Toast.makeText(MainActivity.this, message,
-                                        Toast.LENGTH_LONG).show();
-
-
-                                mUserNew.setText(null);
-                                mPassNew.setText(null);
-                                mVerPassNew.setText(null);
-
-                                return;
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
+                    registerUser(userName, Pass, verPass);
 
 //                    mDatabase.child("users").child(userName)
 //                            .child("username").setValue(userName);
@@ -245,4 +115,148 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    public boolean getUser(String userName, final String Pass) {
+
+        final boolean[] flag = {true};
+
+        mDatabase.child("users").child(userName).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.getValue() != null) {
+
+                    String getPass = dataSnapshot.child("password").getValue().toString();
+
+                    if(! getPass.equals("" + Pass.hashCode())) {
+                        String message = String.format(MainActivity.this.getResources()
+                                .getString(R.string.pass_incorrect));
+
+                        Toast.makeText(MainActivity.this, message,
+                                Toast.LENGTH_LONG).show();
+
+                    } else {    //  Access Granted
+                        String message = String.format(MainActivity.this.getResources()
+                                .getString(R.string.access_granted));
+
+                        Toast.makeText(MainActivity.this, message,
+                                Toast.LENGTH_LONG).show();
+
+                        mUserExisting.setText(null);
+                        mPassExisting.setText(null);
+
+                        Intent MapActivity = new Intent(MainActivity.this, GetLocation.class);
+                        startActivity(MapActivity);
+
+                        flag[0] = true;
+                    }
+
+                } else {
+
+                    String message = String.format(MainActivity.this.getResources()
+                            .getString(R.string.user_not_found));
+
+                    Toast.makeText(MainActivity.this, message,
+                            Toast.LENGTH_LONG).show();
+
+                    flag[0] = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        return true;
+    }
+
+    public boolean registerUser(final String userName, final String Pass, String verPass) {
+
+        if(userName.length() < 5) {
+            String message = String.format(MainActivity.this.getResources()
+                    .getString(R.string.user_length_min));
+
+            Toast.makeText(MainActivity.this, message,
+                    Toast.LENGTH_LONG).show();
+
+            return false;
+        }
+
+        if(Pass.length() < 6) {
+            String message = String.format(MainActivity.this.getResources()
+                    .getString(R.string.pass_length_min));
+
+            Toast.makeText(MainActivity.this, message,
+                    Toast.LENGTH_LONG).show();
+
+            return false;
+        }
+
+        //  Check if the password verification matches the password
+        if(! (Pass.equals(verPass))) {
+            String message = String.format(MainActivity.this.getResources()
+                    .getString(R.string.pass_ver_failed));
+
+            Toast.makeText(MainActivity.this, message,
+                    Toast.LENGTH_LONG).show();
+
+            return false;
+        }
+
+        //  Check if there is already a user with that name
+        mDatabase.child("users").child(userName).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!RegisterOnce) {
+
+                }
+                if (dataSnapshot.exists() && RegisterOnce) {
+                    String message = String.format(MainActivity.this.getResources()
+                            .getString(R.string.user_exists));
+
+                    Toast.makeText(MainActivity.this, message,
+                            Toast.LENGTH_LONG).show();
+
+//                                Toast.makeText(MainActivity.this,
+//                                        "Data: "+dataSnapshot.getKey().toString(), Toast.LENGTH_LONG).show();
+
+                    return;
+
+                } else {
+                    RegisterOnce = false;
+                    mDatabase.child("users").child(userName)
+                            .child("username").setValue(userName);
+                    mDatabase.child("users").child(userName)
+                            .child("password").setValue(Pass.hashCode());
+
+//                                Toast.makeText(MainActivity.this,
+//                                        "Welcome "+userName+"!", Toast.LENGTH_LONG).show();
+
+                    String message = String.format(MainActivity.this.getResources()
+                            .getString(R.string.welcome), userName);
+
+                    Toast.makeText(MainActivity.this, message,
+                            Toast.LENGTH_LONG).show();
+
+
+                    mUserNew.setText(null);
+                    mPassNew.setText(null);
+                    mVerPassNew.setText(null);
+
+                    return;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        return true;
+
+    }
+
 }
