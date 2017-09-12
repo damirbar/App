@@ -135,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, message,
                                 Toast.LENGTH_LONG).show();
 
+                        flag[0] = false;
+
                     } else {    //  Access Granted
                         String message = String.format(MainActivity.this.getResources()
                                 .getString(R.string.access_granted));
@@ -169,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        return true;
+        return flag[0];
     }
 
     public boolean registerUser(final String userName, final String Pass, String verPass) {
