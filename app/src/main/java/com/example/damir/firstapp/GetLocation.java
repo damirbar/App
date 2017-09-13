@@ -1,6 +1,5 @@
 package com.example.damir.firstapp;
 
-//import android.*;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,14 +31,11 @@ public class GetLocation extends FragmentActivity
 
     private boolean mPermissionDenied = false;
 
-
-//    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private Button mBackBtn;
     private Button mJerusalemButton;
     private Button mTLVButton;
     private Button mPetahTikwaButton;
     private Button mItemsBtn;
-//    private SupportMapFragment mapFragment;
     private GoogleMap mMap;
 
     /**
@@ -58,10 +54,12 @@ public class GetLocation extends FragmentActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        mJerusalemButton  = (Button) findViewById(R.id.jrslm_btn);      //  Creating a button of one of the Branches of the
-        mTLVButton        = (Button) findViewById(R.id.tlv_btn);
-        mPetahTikwaButton = (Button) findViewById(R.id.pth_tikwa_btn);
-        mBackBtn          = (Button) findViewById(R.id.back_button);
+        //  Creating a button for everyone of the branches of the Carpentry Shoppe.
+        mJerusalemButton  = (Button) findViewById(R.id.jrslm_btn);      //  jerusalem branch.
+        mTLVButton        = (Button) findViewById(R.id.tlv_btn);        //  Tel-Aviv branch.
+        mPetahTikwaButton = (Button) findViewById(R.id.pth_tikwa_btn);  //  Petah-Tikva branch.
+
+        mBackBtn          = (Button) findViewById(R.id.back_button);    //  Go back to the previous.
         mItemsBtn         = (Button) findViewById(R.id.items_button);
 
         mBackBtn.setOnClickListener(new View.OnClickListener() {
