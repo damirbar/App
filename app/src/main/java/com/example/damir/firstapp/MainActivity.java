@@ -3,8 +3,6 @@ package com.example.damir.firstapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +12,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-//import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
@@ -74,9 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-//                mDatabase.child("Name").setValue("Damir");
-
-
             }
         });
 
@@ -99,11 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
                     registerUser(userName, Pass, verPass);
 
-//                    mDatabase.child("users").child(userName)
-//                            .child("username").setValue(userName);
-//                    mDatabase.child("users").child(userName)
-//                            .child("password").setValue(Pass.hashCode());
-
                 } else {
                     String message = String.format(MainActivity.this.getResources()
                             .getString(R.string.fill_all_fields));
@@ -116,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public boolean getUser(String userName, final String Pass) {
+    public boolean getUser(final String userName, final String Pass) {
 
         final boolean[] flag = {true};
 
@@ -148,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
                         mPassExisting.setText(null);
 
                         Intent MapActivity = new Intent(MainActivity.this, GetLocation.class);
+                        MapActivity.putExtra("name", userName);
                         startActivity(MapActivity);
 
                         flag[0] = true;
@@ -221,9 +211,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, message,
                             Toast.LENGTH_LONG).show();
 
-//                                Toast.makeText(MainActivity.this,
-//                                        "Data: "+dataSnapshot.getKey().toString(), Toast.LENGTH_LONG).show();
-
                     return;
 
                 } else {
@@ -233,15 +220,11 @@ public class MainActivity extends AppCompatActivity {
                     mDatabase.child("users").child(userName)
                             .child("password").setValue(Pass.hashCode());
 
-//                                Toast.makeText(MainActivity.this,
-//                                        "Welcome "+userName+"!", Toast.LENGTH_LONG).show();
-
                     String message = String.format(MainActivity.this.getResources()
                             .getString(R.string.welcome), userName);
 
                     Toast.makeText(MainActivity.this, message,
                             Toast.LENGTH_LONG).show();
-
 
                     mUserNew.setText(null);
                     mPassNew.setText(null);
@@ -253,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                //  Pass. There is no option to cancel.
             }
         });
 

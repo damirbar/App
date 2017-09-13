@@ -29,4 +29,6 @@
     <string name="user_not_found">משתמש לא נמצא</string>
     <string name="welcome">ברוך הבא %s</string>
     <string name="get_curr_loc_btn">עובר למיקום שלך</string>
+    <string name="items">פריטים</string>
+    <string name="your_items">הפריטים שלך:</string>
 </resources>
