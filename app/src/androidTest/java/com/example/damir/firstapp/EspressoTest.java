@@ -34,10 +34,6 @@ public class EspressoTest {
     public ActivityTestRule<MainActivity> mActivityRule =
             new ActivityTestRule<>(MainActivity.class);
 
-//    @Rule
-//    public ActivityTestRule<GetLocation> mMapActivityRule =
-//            new ActivityTestRule<>(GetLocation.class);
-
     @Before
     public void holdOn() throws InterruptedException {
         sleep(5000);
@@ -45,27 +41,21 @@ public class EspressoTest {
 
     @Test
     public void signInButtonAppears() throws InterruptedException {
-//        sleep(1000);
         onView((withText(R.string.sign_in))).check(matches(isDisplayed()));
     }
 
     @Test
     public void signUpButtonAppears() throws InterruptedException {
-//        sleep(5000);
         onView((withText(R.string.sign_up))).check(matches(isDisplayed()));
     }
 
     @Test
     public void headerAppear() throws InterruptedException {
-//        onView((withText(R.string.app_name))).check(matches(isDisplayed()));
         onView((withText(R.string.app_name))).check(matches(isDisplayed()));
     }
 
-
     @Test
     public void intentHappened() throws InterruptedException {
-
-//        sleep(5000);
 
         onView(withId(R.id.name_field)).perform(typeText("admn"));
         sleep(500);
