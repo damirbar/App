@@ -25,35 +25,40 @@ public class MockitoTest {
     String NonValidPassword;
     MainActivity Act;
 
+    //  Initialize of an activity and strings we use in the tests.
     @Before
-    public void initialize() {                       //  Initialize of an activity and strings we use in the tests.
+    public void initialize() {
         Act = mock(MainActivity.class);
         UserName = "Leora";
-        NonValidUserName = "Dami";                  //  Not valid user name - to short, needed at least 5 charecters.
+        NonValidUserName = "Dami";       //  Not valid user name - to short, needed at least 5 charecters.
         Password = "123456";
         PasswordWrong = "654321";
-        NonValidPassword = "1235";                  //  Not valid user name - to short, needed at least 6 charecters.
+        NonValidPassword = "1235";       //  Not valid user name - to short, needed at least 6 charecters.
     }
 
+    //  Checks that the function returns false on a short name.
     @Test
-    public void shortUserLength() {                 //  Checks that the function returns false on a short name.
+    public void shortUserLength() {
         when(Act.registerUser(NonValidUserName, Password, Password)).thenReturn(false);
         assertFalse(Act.registerUser(NonValidUserName, Password, Password));
     }
 
+    //  Checks that the function returns true on a valid name, valid password and the varify of the password.
     @Test
-    public void newUserLength() {                   //  Checks that the function returns true on a valid name, valid password and the varify of the password.
+    public void newUserLength() {
         when(Act.registerUser(UserName, Password, Password)).thenReturn(true);
         assertTrue(Act.registerUser(UserName, Password, Password));
     }
 
+    //  Checks that the function returns false on a short password.
     @Test
-    public void shortPassLength() {                 //  Checks that the function returns false on a short password.
+    public void shortPassLength() {
         when(Act.registerUser(UserName, NonValidPassword, NonValidPassword)).thenReturn(false);
         assertFalse(Act.registerUser(UserName, NonValidPassword, NonValidPassword));
     }
+    //  Checks that the function returns false on a wrong verify of the password.
     @Test
-    public void inCorectPassword() {                //  Checks that the function returns false on a wrong verify of the password.
+    public void inCorectPassword() {
         when(Act.registerUser(UserName, Password, PasswordWrong)).thenReturn(false);
         assertFalse(Act.registerUser(UserName, Password, PasswordWrong));
     }
