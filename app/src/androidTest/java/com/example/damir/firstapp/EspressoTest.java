@@ -24,6 +24,8 @@ import static org.mockito.Mockito.mock;
 
 /**
  * Created by damir on 9/12/2017.
+ *
+ * Espresso test, for graphic tests.
  */
 
 public class EspressoTest {
@@ -31,32 +33,32 @@ public class EspressoTest {
 
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityRule =
+    public ActivityTestRule<MainActivity> mActivityRule =      //  This rule provides functional testing of a single Activity.
             new ActivityTestRule<>(MainActivity.class);
 
     @Before
-    public void holdOn() throws InterruptedException {
+    public void holdOn() throws InterruptedException {          //  Before runnimg the tests, we want the app to be on for sure.
         sleep(5000);
     }
 
     @Test
-    public void signInButtonAppears() throws InterruptedException {
+    public void signInButtonAppears() throws InterruptedException {         //  Checks the sign_in string appears on the first activity.
         onView((withText(R.string.sign_in))).check(matches(isDisplayed()));
     }
 
     @Test
-    public void signUpButtonAppears() throws InterruptedException {
+    public void signUpButtonAppears() throws InterruptedException {         //  Checks the sign_up string appears on the first activity.
         onView((withText(R.string.sign_up))).check(matches(isDisplayed()));
     }
 
     @Test
-    public void headerAppear() throws InterruptedException {
+    public void headerAppear() throws InterruptedException {                //  Checks the app_name string appears on the first activity.
         onView((withText(R.string.app_name))).check(matches(isDisplayed()));
     }
 
     @Test
-    public void intentHappened() throws InterruptedException {
-
+    public void intentHappened() throws InterruptedException {              //  Checks that the user we added by the admin, succeeded loging in,
+                                                                            //  and that the branches_text string appears on the GetLocation activity.
         onView(withId(R.id.name_field)).perform(typeText("admn"));
         sleep(500);
         pressBack();
