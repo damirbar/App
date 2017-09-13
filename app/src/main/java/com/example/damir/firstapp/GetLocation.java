@@ -65,8 +65,8 @@ public class GetLocation extends FragmentActivity
         mTLVButton        = (Button) findViewById(R.id.tlv_btn);        //  Tel-Aviv branch.
         mPetahTikwaButton = (Button) findViewById(R.id.pth_tikwa_btn);  //  Petah-Tikva branch.
 
-        mBackBtn          = (Button) findViewById(R.id.back_button);    //  Go back to the previous.
-        mItemsBtn         = (Button) findViewById(R.id.items_button);
+        mBackBtn          = (Button) findViewById(R.id.back_button);    //  Go back to the previous activity.
+        mItemsBtn         = (Button) findViewById(R.id.items_button);   //  Go to the ItemsActivity and see the things in the cart.
 
         mBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
