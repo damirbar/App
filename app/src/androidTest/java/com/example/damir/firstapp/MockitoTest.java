@@ -41,8 +41,8 @@ public class MockitoTest {
 
     @Test
     public void shortUserLength() {
-        when(Act.registerUser(NonValidUserName, Password, Password)).thenReturn(true);
-        assertTrue(Act.registerUser(NonValidUserName, Password, Password));
+        when(Act.registerUser(NonValidUserName, Password, Password)).thenReturn(false);
+        assertFalse(Act.registerUser(NonValidUserName, Password, Password));
     }
 
     @Test
@@ -53,12 +53,12 @@ public class MockitoTest {
 
     @Test
     public void shortPassLength() {
-        when(Act.registerUser(UserName, NonValidPassword, NonValidPassword)).thenReturn(true);
-        assertTrue(Act.registerUser(UserName, NonValidPassword, NonValidPassword));
+        when(Act.registerUser(UserName, NonValidPassword, NonValidPassword)).thenReturn(false);
+        assertFalse(Act.registerUser(UserName, NonValidPassword, NonValidPassword));
     }
     @Test
     public void inCorectPassword() {
-        when(Act.registerUser(UserName, Password, PasswordWrong)).thenReturn(true);
-        assertTrue(Act.registerUser(UserName, Password, PasswordWrong));
+        when(Act.registerUser(UserName, Password, PasswordWrong)).thenReturn(false);
+        assertFalse(Act.registerUser(UserName, Password, PasswordWrong));
     }
 }
