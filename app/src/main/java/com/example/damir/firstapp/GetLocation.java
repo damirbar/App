@@ -19,7 +19,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
+/**
+ *
+ *  This activity appears after the user signs in. It has options to either go to the users location or
+ *  go to one of the Carpentry Shoppe branches location. Another option is to see if there are any
+ *  items in the users cart and so it will transfer the user to the activity ItemsActivity.
+ *
+ */
 public class GetLocation extends FragmentActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,
@@ -54,7 +60,7 @@ public class GetLocation extends FragmentActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        //  Creating a button for everyone of the branches of the Carpentry Shoppe.
+        //  Creating a button for everyone of the branches of the Carpentry Shoppe to see there location.
         mJerusalemButton  = (Button) findViewById(R.id.jrslm_btn);      //  jerusalem branch.
         mTLVButton        = (Button) findViewById(R.id.tlv_btn);        //  Tel-Aviv branch.
         mPetahTikwaButton = (Button) findViewById(R.id.pth_tikwa_btn);  //  Petah-Tikva branch.
@@ -128,8 +134,6 @@ public class GetLocation extends FragmentActivity
 
         mMap.setOnMyLocationButtonClickListener(this);
         enableMyLocation();
-
-//        onMyLocationButtonClick();
     }
 
     /**
@@ -147,6 +151,11 @@ public class GetLocation extends FragmentActivity
         }
     }
 
+    /**
+     * shows the toast "going to your location" while finding the users exact location.
+     *
+     * @return false so we go to the users location.
+     */
     @Override
     public boolean onMyLocationButtonClick() {
 
@@ -162,6 +171,13 @@ public class GetLocation extends FragmentActivity
     }
 
 
+    /**
+     *  Checks that the phone user allows access to his location.
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -179,6 +195,10 @@ public class GetLocation extends FragmentActivity
         }
     }
 
+    /**
+     *  Allow the access to the phone location.
+     *
+     */
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
