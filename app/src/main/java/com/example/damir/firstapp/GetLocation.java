@@ -1,6 +1,6 @@
 package com.example.damir.firstapp;
 
-import android.*;
+//import android.*;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -42,7 +42,13 @@ public class GetLocation extends FragmentActivity
 //    private SupportMapFragment mapFragment;
     private GoogleMap mMap;
 
-
+    /**
+     *  Initializing map and buttons on the map.
+     *
+     *  This onCreate also includes an implementation of the buttons' OnCreateListeners.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +58,7 @@ public class GetLocation extends FragmentActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        mJerusalemButton  = (Button) findViewById(R.id.jrslm_btn);
+        mJerusalemButton  = (Button) findViewById(R.id.jrslm_btn);      //  Creating a button of one of the Branches of the
         mTLVButton        = (Button) findViewById(R.id.tlv_btn);
         mPetahTikwaButton = (Button) findViewById(R.id.pth_tikwa_btn);
         mBackBtn          = (Button) findViewById(R.id.back_button);
