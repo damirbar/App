@@ -19,6 +19,9 @@
     <string name="jerusalem_button">Jerusalem</string>
     <string name="petah_tikwa_button">Petah Tikwa</string>
     <string name="tlv_button">Tel-Aviv</string>
+    <string name="your_items">Your Items:</string>
+    <string name="items">Items</string>
+
 
     <!--Toast strings:-->
     <string name="pass_incorrect">Password incorrect</string>
