@@ -1,5 +1,12 @@
 package com.example.damir.firstapp;
 
+/*----------------------------------------------------------------------------------------------*
+ *   Copyright (c) 2017, Leora Schmerler and Damir Bar. All rights reserved.                    *
+ *   Do not alter or remove copyright notices or this header.                                   *
+ *                                                                                              *
+ *   The following code is free to use. You are allowed to modify any part of it.               *
+------------------------------------------------------------------------------------------------*/
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +21,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
+/**
+ *  Sep - 14 - 2017
+ *
+ *  <h1>Software Structure - final exercise</h1>
+ *  <h2>
+ *  This activity is the main activity. It has options to either sign in or sign up.
+ *  Once a user exists and signs in, it will transfer him/her to the activity GetLocation.
+ *  </h2>
+ *
+ *  <p>Have fun</p>
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private Button mSgninBtn;       //  The Sign in button
@@ -23,8 +43,18 @@ public class MainActivity extends AppCompatActivity {
     private EditText mUserNew;      //  Text field for a new user
     private EditText mPassNew;      //  Text field for a new password
     private EditText mVerPassNew;   //  Text field for verification the new password
+
     private DatabaseReference mDatabase;
-    private boolean RegisterOnce;
+    private boolean RegisterOnce;   //  A flag to let a user register once.
+
+
+    /**
+     *  The typical onCreate function. Initializes buttons, edit-texts and out database.
+     *
+     *  This onCreate also includes an implementation of the buttons' OnClickListeners.
+     *
+     *  @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +112,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
                 //  First we check if there was an input in both user and password field
+
                 if (! (mUserNew.getText().toString().equals("")) &&
                         ! (mPassNew.getText().toString().equals(""))&&
                         ! (mVerPassNew.getText().toString().equals("")) ) {
@@ -93,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
                     registerUser(userName, Pass, verPass);
 
-                } else {
+                } else {    //  The user didn't fill all of the fields.
                     String message = String.format(MainActivity.this.getResources()
                             .getString(R.string.fill_all_fields));
 
@@ -104,6 +136,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    /**
+     *  This method is for fetching an existing user.
+     *
+     *  If the user doesn't exist, or the password is incorrect it returns false.
+     *
+     *  If the user exists it returns true and performs an intent to the GetLocation
+     *  activity.
+     *
+     * @param userName
+     * @param Pass
+     * @return true --> success. false --> failure.
+     */
 
     public boolean getUser(final String userName, final String Pass) {
 
@@ -136,6 +181,9 @@ public class MainActivity extends AppCompatActivity {
                         mUserExisting.setText(null);
                         mPassExisting.setText(null);
 
+
+                        //  There is a need for keeping the user name information in order to
+                        //  later obtain his item list.
                         Intent MapActivity = new Intent(MainActivity.this, GetLocation.class);
                         MapActivity.putExtra("name", userName);
                         startActivity(MapActivity);
@@ -164,8 +212,23 @@ public class MainActivity extends AppCompatActivity {
         return flag[0];
     }
 
+    /**
+     *  This method is for registering a new user.
+     *
+     *  If the user doesn't exist, the user name is at least 5 characters long and
+     *  the password is at least 6 characters long, there will a checking whether
+     *  the user exists. If it doesn't, the method will register it and return true.
+     *  If not, it will not register the user and will return false.
+     *
+     * @param userName
+     * @param Pass
+     * @param verPass
+     * @return  true --> success. false --> failure.
+     */
+
     public boolean registerUser(final String userName, final String Pass, String verPass) {
 
+        //  The user name must be at least 5 characters long.
         if(userName.length() < 5) {
             String message = String.format(MainActivity.this.getResources()
                     .getString(R.string.user_length_min));
@@ -176,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
 
+        //  The password must be at least 6 characters long.
         if(Pass.length() < 6) {
             String message = String.format(MainActivity.this.getResources()
                     .getString(R.string.pass_length_min));
@@ -186,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
 
-        //  Check if the password verification matches the password
+        //  Checking if the password verification matches the password.
         if(! (Pass.equals(verPass))) {
             String message = String.format(MainActivity.this.getResources()
                     .getString(R.string.pass_ver_failed));
