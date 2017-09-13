@@ -55,15 +55,15 @@ public class GetLocation extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_location);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        //  Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         //  Creating a button for everyone of the branches of the Carpentry Shoppe to see there location.
-        mJerusalemButton  = (Button) findViewById(R.id.jrslm_btn);      //  jerusalem branch.
+        mJerusalemButton  = (Button) findViewById(R.id.jrslm_btn);      //  Jerusalem branch.
         mTLVButton        = (Button) findViewById(R.id.tlv_btn);        //  Tel-Aviv branch.
-        mPetahTikwaButton = (Button) findViewById(R.id.pth_tikwa_btn);  //  Petah-Tikva branch.
+        mPetahTikwaButton = (Button) findViewById(R.id.pth_tikwa_btn);  //  Petah-Tikwa branch.
 
         mBackBtn          = (Button) findViewById(R.id.back_button);    //  Go back to the previous activity.
         mItemsBtn         = (Button) findViewById(R.id.items_button);   //  Go to the ItemsActivity and see the things in the cart.
@@ -122,11 +122,11 @@ public class GetLocation extends FragmentActivity
 
 
     /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera.     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
+     *  Manipulates the map once available.
+     *  This callback is triggered when the map is ready to be used.
+     *  This is where we can add markers or lines, add listeners or move the camera.     * If Google Play services is not installed on the device, the user will be prompted to install
+     *  it inside the SupportMapFragment. This method will only be triggered once the user has
+     *  installed Google Play services and returned to the app.
      */
     @Override
     public void onMapReady(GoogleMap map) {
@@ -137,22 +137,22 @@ public class GetLocation extends FragmentActivity
     }
 
     /**
-     * Enables the My Location layer if the fine location permission has been granted.
+     *  Enables the My Location layer if the fine location permission has been granted.
      */
     private void enableMyLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            // Permission to access the location is missing.
+            //  Permission to access the location is missing.
             PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
                     Manifest.permission.ACCESS_FINE_LOCATION, true);
         } else if (mMap != null) {
-            // Access to the location has been granted to the app.
+            //  Access to the location has been granted to the app.
             mMap.setMyLocationEnabled(true);
         }
     }
 
     /**
-     * shows the toast "going to your location" while finding the users exact location.
+     *  Shows the toast "going to your location" while finding the users exact location.
      *
      * @return false so we go to the users location.
      */
@@ -165,14 +165,14 @@ public class GetLocation extends FragmentActivity
         Toast.makeText(GetLocation.this, message,
                 Toast.LENGTH_LONG).show();
 
-        // Return false so that we don't consume the event and the default behavior still occurs
-        // (the camera animates to the user's current position).
+        //  Return false so that we don't consume the event and the default behavior still occurs
+        //  (the camera animates to the user's current position).
         return false;
     }
 
 
     /**
-     *  Checks that the phone user allows access to his location.
+     *  Checks that the user allows access to his smartphone's location.
      *
      * @param requestCode
      * @param permissions
@@ -187,30 +187,30 @@ public class GetLocation extends FragmentActivity
 
         if (PermissionUtils.isPermissionGranted(permissions, grantResults,
                 Manifest.permission.ACCESS_FINE_LOCATION)) {
-            // Enable the my location layer if the permission has been granted.
+            //  Enable the my location layer if the permission has been granted.
             enableMyLocation();
         } else {
-            // Display the missing permission error dialog when the fragments resume.
+            //  Display the missing permission error dialog when the fragments resume.
             mPermissionDenied = true;
         }
     }
 
     /**
-     *  Allow the access to the phone location.
+     *  Allows access to the phone's location.
      *
      */
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
         if (mPermissionDenied) {
-            // Permission was not granted, display error dialog.
+            //  Permission was not granted, display error dialog.
             showMissingPermissionError();
             mPermissionDenied = false;
         }
     }
 
     /**
-     * Displays a dialog with error message explaining that the location permission is missing.
+     *  Displays a dialog with error message explaining that the location permission is missing.
      */
     private void showMissingPermissionError() {
         PermissionUtils.PermissionDeniedDialog
